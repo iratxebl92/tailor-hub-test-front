@@ -12,7 +12,7 @@ export function CommentForm() {
           <button
             key={star}
             onClick={() => setRating(star)}
-            className="focus:outline-none transition-transform hover:scale-110"
+            className="focus:outline-none transition-transform hover:scale-110 hover:cursor-pointer"
           >
             <svg
               className={`w-6 h-6 ${
@@ -38,7 +38,7 @@ export function CommentForm() {
         className="w-full min-h-[120px] p-4 text-sm bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none mb-4"
       />
       
-      <button className="w-fit px-8 py-2 bg-white border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition-colors">
+      <button className="w-fit px-8 py-2 bg-white border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition-colors hover:cursor-pointer">
         Enviar
       </button>
     </div>

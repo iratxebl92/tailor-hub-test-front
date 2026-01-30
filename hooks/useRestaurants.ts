@@ -58,3 +58,29 @@ export function useRestaurant(id: number | string) {
 
   return { restaurant, loading, error };
 }
+
+
+// Hook para crear un nuevo restaurante
+export function useCreateRestaurant() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Función para crear el restaurante
+  const createRestaurant = async (restaurant: Omit<Restaurant, 'id'>): Promise<Restaurant | null> => {
+    setLoading(true);
+    setError(null);
+
+    const response = await restaurantService.create(restaurant);
+
+    setLoading(false);
+
+    if (response.error) {
+      setError(response.error);
+      return null;
+    }
+
+    return response.data;
+  };
+
+  return { createRestaurant, loading, error };
+}

@@ -41,7 +41,7 @@ export const RegisterStepTwo = () => {
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors"
+            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-white/80 transition-colors hover:cursor-pointer"
             aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
           >
             {showPassword ? (
@@ -55,7 +55,7 @@ export const RegisterStepTwo = () => {
 
       <button
         type="submit"
-        className="bg-white text-black font-bold py-3 rounded-full hover:bg-white/90 hover:cursor-pointer transition-colors self-start px-8"
+        className="bg-white text-black font-bold py-3 rounded-full hover:bg-white/90 hover:cursor-pointer transition-colors self-start px-8 hover:cursor-pointer"
       >
         Finalizar
       </button>

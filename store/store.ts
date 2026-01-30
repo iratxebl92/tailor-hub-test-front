@@ -9,6 +9,8 @@ type RestaurantStore = {
   setSelectedRestaurantId: (id: number | null) => void
 }
 
+//Store general de la aplicación
+
 export const useRestaurantStore = create<RestaurantStore>((set) => ({
   registerStep: 1,
   setRegisterStep: (step) => set({ registerStep: step }),
@@ -16,4 +18,44 @@ export const useRestaurantStore = create<RestaurantStore>((set) => ({
   setIsUserMenuOpen: (isOpen) => set({ isUserMenuOpen: isOpen }),
   selectedRestaurantId: null,
   setSelectedRestaurantId: (id) => set({ selectedRestaurantId: id }),
+}))
+
+// Store para nuevo restaurante
+type NewRestaurantStore = {
+  name: string
+  address: string
+  description: string
+  image: string | null
+  isSaved: boolean
+  validationError: string
+  setName: (value: string) => void
+  setAddress: (value: string) => void
+  setDescription: (value: string) => void
+  setImage: (value: string | null) => void
+  setIsSaved: (value: boolean) => void
+  setValidationError: (value: string) => void
+  reset: () => void
+}
+
+export const useNewRestaurantStore = create<NewRestaurantStore>((set) => ({
+  name: "",
+  address: "",
+  description: "",
+  image: null,
+  isSaved: false,
+  validationError: "",
+  setName: (value) => set({ name: value }),
+  setAddress: (value) => set({ address: value }),
+  setDescription: (value) => set({ description: value }),
+  setImage: (value) => set({ image: value }),
+  setIsSaved: (value) => set({ isSaved: value }),
+  setValidationError: (value) => set({ validationError: value }),
+  reset: () => set({
+    name: "",
+    address: "",
+    description: "",
+    image: null,
+    isSaved: false,
+    validationError: "",
+  }),
 }))

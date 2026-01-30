@@ -43,10 +43,10 @@ export function CommentCard({ comment }: CommentCardProps) {
           
           {comment.isOwn && (
             <div className="flex gap-3 self-center sm:self-start mt-2">
-              <button className="px-6 py-1.5 border border-black rounded-full text-xs font-medium hover:bg-black hover:text-white transition-colors">
+              <button className="px-6 py-1.5 border border-black rounded-full text-xs font-medium hover:bg-black hover:text-white transition-colors hover:cursor-pointer">
                 Editar
               </button>
-              <button className="px-6 py-1.5 border border-black rounded-full text-xs font-medium hover:bg-black hover:text-white transition-colors">
+              <button className="px-6 py-1.5 border border-black rounded-full text-xs font-medium hover:bg-black hover:text-white transition-colors hover:cursor-pointer">
                 Eliminar
               </button>
             </div>
