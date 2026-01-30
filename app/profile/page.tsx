@@ -1,0 +1,11 @@
+import type { Metadata } from "next"
+import { ProfilePage } from "@/components/profile/ProfilePage"
+
+export const metadata: Metadata = {
+  title: 'My account',
+  description: 'Manage your profile and preferences',
+}
+
+export default function Profile() {
+  return <ProfilePage />
+}

@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-bg:#F1F1F0;
+  --color-footer-color: #777777;
+  --color-tailor-bg: #264BEB;
+  --color-map-marker: #8DA0F0;
+}
