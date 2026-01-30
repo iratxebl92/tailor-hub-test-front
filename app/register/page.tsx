@@ -2,6 +2,7 @@
 import { TwoColumnSection } from "@/components/layouts/TwoColumnSection"
 import { RegisterForm } from "@/components/auth/RegisterForm"
 import { Metadata } from "next"
+import { Footer } from "@/components/core/Footer"
 
 export const metadata: Metadata = {
   title: 'Register',
@@ -17,11 +18,8 @@ export default function RegisterPage() {
           rightImageAlt="Imagen de registro"
         />
       </div>
-      <footer className="pb-2 pl-4 sm:pl-6 md:pl-8">
-        <p className="text-xs text-footer-color">
-          Prueba técnica ©Tailor hub SL 2019 – 2026
-        </p>
-      </footer>
+      <Footer className="pb-2 pl-4 sm:pl-6 md:pl-8"
+      />
     </main>
   )
 }

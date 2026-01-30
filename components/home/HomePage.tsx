@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { LandingScreen } from "@/components/home/LandingScreen"
 import { OnboardingLayout } from "@/components/home/onboarding/OnboardingLayout"
+import { Footer } from "../core/Footer"
 
 export function HomePage() {
   const [showOnboarding, setShowOnboarding] = useState(false)
@@ -31,11 +32,7 @@ export function HomePage() {
         </div>
       </div>
 
-      <footer className="pb-2 pl-4 sm:pl-6 md:pl-8">
-        <p className="text-xs text-footer-color">
-          Prueba técnica © Tailor hub SL 2019 – 2026
-        </p>
-      </footer>
+     <Footer className="pb-2 pl-4 sm:pl-6 md:pl-8" />
     </main>
   )
 }

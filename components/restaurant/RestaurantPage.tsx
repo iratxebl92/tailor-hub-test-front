@@ -6,6 +6,7 @@ import { RestaurantHero } from "./RestaurantHero"
 import { RestaurantInfo } from "./RestaurantInfo"
 import { CommentForm } from "./CommentForm"
 import { CommentList } from "./CommentList"
+import { Footer } from "../core/Footer"
 
 type RestaurantPageProps = {
   id: string
@@ -60,11 +61,7 @@ export function RestaurantPage({ id }: RestaurantPageProps) {
       </div>
 
     
-      <footer className="py-6 px-4 sm:px-6 md:px-8 border-t border-gray-50">
-        <p className="text-xs text-footer-color text-center sm:text-left">
-          Prueba técnica © Tailor hub SL 2019 – 2026
-        </p>
-      </footer>
+      <Footer className="pb-2 pl-4 sm:pl-6 md:pl-8" />
     </main>
   )
 }

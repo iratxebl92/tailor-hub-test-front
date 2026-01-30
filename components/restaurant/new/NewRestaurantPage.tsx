@@ -5,6 +5,7 @@ import { UserHeader } from "@/components/core/UserHeader"
 import { ImageUploader } from "./ImageUploader"
 import { NewRestaurantForm } from "./NewRestaurantForm"
 import { SuccessView } from "./SuccessView"
+import { Footer } from "@/components/core/Footer"
 
 export function NewRestaurantPage() {
   const [image, setImage] = useState<string | null>(null)
@@ -48,12 +49,7 @@ export function NewRestaurantPage() {
         </div>
       </div>
 
- 
-      <footer className="py-6 px-4 sm:px-6 md:px-8 border-t border-gray-50">
-        <p className="text-xs text-footer-color text-center sm:text-left">
-          Prueba técnica © Tailor hub SL 2019 – 2026
-        </p>
-      </footer>
+ <Footer className="pb-2 pl-4 sm:pl-6 md:pl-8" />
     </main>
   )
 }

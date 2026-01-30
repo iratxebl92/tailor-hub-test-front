@@ -1,6 +1,7 @@
 import { UserHeader } from "@/components/core/UserHeader"
 import { MapContainer } from "./MapContainer"
 import { RestaurantList } from "./RestaurantList"
+import { Footer } from "../core/Footer"
 
 export function MapPage() {
   return (
@@ -15,11 +16,9 @@ export function MapPage() {
         <div className="flex flex-col flex-1 lg:flex-[1.2] min-h-0">
           <MapContainer />
         
-          <footer className="pt-2">
-            <p className="text-xs text-footer-color">
-              Prueba técnica © Tailor hub SL 2019 – 2026
-            </p>
-          </footer>
+          <Footer
+          className="pt-2"
+          />
         </div>
 
         <div className="flex-1 lg:flex-[0.8] min-h-0">
