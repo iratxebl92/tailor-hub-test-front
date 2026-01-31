@@ -1,8 +1,6 @@
 import { create } from "zustand"
 
 type RestaurantStore = {
-  registerStep: 1 | 2
-  setRegisterStep: (step: 1 | 2) => void
   isUserMenuOpen: boolean
   setIsUserMenuOpen: (isOpen: boolean) => void
   selectedRestaurantId: number | null
@@ -12,8 +10,6 @@ type RestaurantStore = {
 //Store general de la aplicación
 
 export const useRestaurantStore = create<RestaurantStore>((set) => ({
-  registerStep: 1,
-  setRegisterStep: (step) => set({ registerStep: step }),
   isUserMenuOpen: false,
   setIsUserMenuOpen: (isOpen) => set({ isUserMenuOpen: isOpen }),
   selectedRestaurantId: null,

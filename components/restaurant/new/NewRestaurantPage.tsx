@@ -6,9 +6,18 @@ import { NewRestaurantForm } from "./NewRestaurantForm"
 import { SuccessView } from "./SuccessView"
 import { Footer } from "@/components/core/Footer"
 import { useNewRestaurant } from "./hook/useNewRestaurant"
+import { LoadingSpinner } from "@/components/core/LoadingSpinner"
 
 export function NewRestaurantPage() {
-    const { isSaved } = useNewRestaurant()
+    const { isSaved, loading } = useNewRestaurant()
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center py-12">
+                <LoadingSpinner />
+            </div>
+        )
+    }
 
     return (
         <main className="min-h-screen bg-white flex flex-col">

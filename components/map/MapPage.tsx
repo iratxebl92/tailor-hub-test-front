@@ -1,9 +1,19 @@
+"use client"
+
 import { UserHeader } from "@/components/core/UserHeader"
 import { MapContainer } from "./MapContainer"
 import { RestaurantList } from "./RestaurantList"
 import { Footer } from "../core/Footer"
+import { useRestaurants } from "@/hooks/useRestaurants"
+import { LoadingSpinner } from "../core/LoadingSpinner"
 
 export function MapPage() {
+  const {  loading } = useRestaurants()
+  if (loading) {
+    return (
+      <LoadingSpinner />
+    )
+  }
   return (
     <main className="flex flex-col h-screen w-screen overflow-hidden">
    
