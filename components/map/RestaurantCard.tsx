@@ -1,6 +1,11 @@
+"use client"
+
 import Image from "next/image"
+import { useState } from "react"
 import { Stars } from "../Icons/Stars"
 import type { RestaurantCard as RestaurantCardType } from "@/domain/types"
+
+const DEFAULT_IMAGE = "/images/default-image.avif"
 
 type RestaurantCardProps = {
   restaurant: RestaurantCardType
@@ -13,6 +18,7 @@ export function RestaurantCard({
   isSelected = false, 
   onClick 
 }: RestaurantCardProps) {
+  const [imgSrc, setImgSrc] = useState(restaurant.image || DEFAULT_IMAGE)
   
  //Generar las estrellas de la calificación
   const renderStars = () => {
@@ -40,10 +46,13 @@ export function RestaurantCard({
         <div className="shrink-0">
           <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden bg-gray-200">
             <Image
-              src={restaurant.image || "/images/default-image.avif"}
-              alt={restaurant.name}
+              src={imgSrc}
+              alt={restaurant.name || 'Imágen del restaurante'}
               fill
               className="object-cover"
+              onError={() => setImgSrc(DEFAULT_IMAGE)}
+              unoptimized={imgSrc.startsWith("http")}
+
             />
           </div>
         </div>

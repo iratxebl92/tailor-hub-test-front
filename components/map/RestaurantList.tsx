@@ -5,6 +5,7 @@ import { useRestaurants } from "@/hooks/useRestaurants"
 import { useRestaurantStore } from "@/store/store"
 import { RestaurantCard } from "./RestaurantCard"
 import type { Restaurant, RestaurantCard as RestaurantCardType } from "@/domain/types"
+import { LoadingSpinner } from "../core/LoadingSpinner"
 
 // Calcula el promedio de las calificaciones de un restaurante
 function calculateAverageRating(reviews: Restaurant["reviews"]): number {
@@ -37,14 +38,6 @@ export function RestaurantList() {
   const handleRestaurantClick = (restaurantId: number) => {
     setSelectedId(restaurantId)
     router.push(`/restaurant/${restaurantId}`)
-  }
-
-  if (loading) {
-    return (
-      <div className="h-full flex items-center justify-center">
-        <p className="text-gray-500">Cargando restaurantes...</p>
-      </div>
-    )
   }
 
   if (error) {
