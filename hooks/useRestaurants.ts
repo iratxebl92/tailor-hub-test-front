@@ -84,3 +84,52 @@ export function useCreateRestaurant() {
 
   return { createRestaurant, loading, error };
 }
+
+
+// Hook para actualizar un restaurante existente
+export function useUpdateRestaurant() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const updateRestaurant = async (id: number | string, restaurant: Omit<Restaurant, 'id'>): Promise<Restaurant | null> => {
+    setLoading(true);
+    setError(null);
+
+    const response = await restaurantService.update(id, restaurant);
+
+    setLoading(false);
+
+    if (response.error) {
+      setError(response.error);
+      return null;
+    }
+
+    return response.data;
+  };
+
+  return { updateRestaurant, loading, error };
+}
+
+// Hook para eliminar un restaurante
+export function useDeleteRestaurant(id: number | string) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const deleteRestaurant = async (id: number | string): Promise<void> => {
+    setLoading(true);
+    setError(null);
+
+    const response = await restaurantService.delete(id);
+
+    setLoading(false);
+
+    if (response.error) {
+      setError(response.error);
+      return;
+    }
+
+    return;
+  };
+
+  return { deleteRestaurant, loading, error };
+}
