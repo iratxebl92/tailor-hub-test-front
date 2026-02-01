@@ -1,6 +1,7 @@
 "use client"
 
 import { useNewRestaurant } from "./hook/useNewRestaurant"
+import { restaurantService } from '../../../services/restaurantService';
 
 export function NewRestaurantForm() {
     const { 
@@ -16,7 +17,7 @@ export function NewRestaurantForm() {
     } = useNewRestaurant()
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 ">
             {errorMessage && (
                 <div className="p-3 bg-red-100 text-red-700 rounded-xl text-sm">
                     {errorMessage}
@@ -26,7 +27,7 @@ export function NewRestaurantForm() {
             <div className="space-y-4">
                 <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1 ml-1">
-                        Nombre
+                        Nombre del restaurante
                     </label>
                     <input
                         id="name"
@@ -40,12 +41,12 @@ export function NewRestaurantForm() {
 
                 <div>
                     <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1 ml-1">
-                        Dirección
+                        Dirección del restaurante
                     </label>
                     <input
                         id="address"
                         type="text"
-                        placeholder="Dirección del restaurante"
+                        placeholder="Dirección"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         className="w-full px-5 py-3 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none transition-all"
@@ -54,11 +55,11 @@ export function NewRestaurantForm() {
 
                 <div>
                     <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1 ml-1">
-                        Descripción
+                        Descripción del restaurante
                     </label>
                     <textarea
                         id="description"
-                        placeholder="Describe el restaurante..."
+                        placeholder="Escribe información acerca del restaurante"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         className="w-full min-h-[120px] px-5 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none transition-all"
@@ -70,7 +71,7 @@ export function NewRestaurantForm() {
                 <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="w-fit px-12 py-3 bg-white border border-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition-all transform active:scale-95 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
+                    className="px-10 py-2.5 border border-slate-400 rounded-full text-black font-bold hover:bg-black hover:text-white transition-all w-full sm:w-auto hover:cursor-pointer"
                 >
                     {loading ? "Guardando..." : "Guardar"}
                 </button>

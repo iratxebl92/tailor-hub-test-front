@@ -24,12 +24,14 @@ type NewRestaurantStore = {
   image: string | null
   isSaved: boolean
   validationError: string
+  createdRestaurantId: number | null
   setName: (value: string) => void
   setAddress: (value: string) => void
   setDescription: (value: string) => void
   setImage: (value: string | null) => void
   setIsSaved: (value: boolean) => void
   setValidationError: (value: string) => void
+  setCreatedRestaurantId: (value: number | null) => void
   reset: () => void
 }
 
@@ -40,12 +42,14 @@ export const useNewRestaurantStore = create<NewRestaurantStore>((set) => ({
   image: null,
   isSaved: false,
   validationError: "",
+  createdRestaurantId: null,
   setName: (value) => set({ name: value }),
   setAddress: (value) => set({ address: value }),
   setDescription: (value) => set({ description: value }),
   setImage: (value) => set({ image: value }),
   setIsSaved: (value) => set({ isSaved: value }),
   setValidationError: (value) => set({ validationError: value }),
+  setCreatedRestaurantId: (value) => set({ createdRestaurantId: value }),
   reset: () => set({
     name: "",
     address: "",
@@ -53,6 +57,7 @@ export const useNewRestaurantStore = create<NewRestaurantStore>((set) => ({
     image: null,
     isSaved: false,
     validationError: "",
+    createdRestaurantId: null,
   }),
 }))
 

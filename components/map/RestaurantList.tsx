@@ -48,7 +48,7 @@ export function RestaurantList() {
     )
   }
 
-  if (restaurants.length === 0) {
+  if (restaurants.length === 0 && !loading) {
     return (
       <div className="h-full flex items-center justify-center">
         <p className="text-gray-500">No hay restaurantes disponibles</p>

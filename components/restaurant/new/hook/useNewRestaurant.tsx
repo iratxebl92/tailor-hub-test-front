@@ -12,12 +12,14 @@ export const useNewRestaurant = () => {
         image,
         isSaved,
         validationError,
+        createdRestaurantId,
         setName,
         setAddress,
         setDescription,
         setImage,
         setIsSaved,
         setValidationError,
+        setCreatedRestaurantId,
         reset,
     } = useNewRestaurantStore()
 
@@ -99,6 +101,7 @@ export const useNewRestaurant = () => {
 
         const result = await createRestaurant(restaurantData)
         if (result) {
+            setCreatedRestaurantId(result.id)
             setIsSaved(true)
         }
     }
@@ -124,6 +127,7 @@ export const useNewRestaurant = () => {
         isSaved,
         loading,
         errorMessage: validationError || apiError,
+        createdRestaurantId,
         // Acciones
         handleSave,
         handleReset,

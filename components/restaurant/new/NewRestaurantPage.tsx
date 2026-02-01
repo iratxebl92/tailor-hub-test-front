@@ -26,25 +26,27 @@ export function NewRestaurantPage() {
     }
 
     return (
-        <main className="min-h-screen bg-white flex flex-col">
-            <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6">
-                <UserHeader />
-            </div>
+        <main className="min-h-screen bg-white flex flex-col font-sans">
+            <UserHeader />
 
-            <div className="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8">
-                <div className="w-full max-w-2xl bg-white rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm">
-                    {!isSaved ? (
-                        <div className="space-y-8">
-                            <h1 className="text-2xl sm:text-3xl font-bold text-black text-center mb-8">
-                                Nuevo Restaurante
-                            </h1>
-                            <ImageUploader />
+            <div className="flex-1 w-full max-w-6xl mx-auto px-6 py-10 flex flex-col items-center justify-center">
+                <img src="/images/tailor-hub-icon.avif" alt="Tailor Hub icon" className="w-15 h-15 mb-10" />
+                {!isSaved ? (
+                    <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                        {/* Columna Izquierda: Imagen */}
+                        <div className="w-full flex justify-center md:justify-end">
+                             <ImageUploader />
+                        </div>
+                        
+                        {/* Columna Derecha: Formulario */}
+                        <div className="w-full ">
                             <NewRestaurantForm />
                         </div>
-                    ) : (
-                        <SuccessView />
-                    )}
-                </div>
+                    </div>
+                ) : (
+                    <SuccessView />
+                )}
+                <img src="/images/tailor-hub-icon.avif" alt="Tailor Hub icon" className="w-15 h-15 mt-10" />
             </div>
 
             <Footer className="pb-2 pl-4 sm:pl-6 md:pl-8" />

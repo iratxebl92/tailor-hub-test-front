@@ -8,28 +8,25 @@ export function ImageUploader() {
     const { image, handleFileChange, handleRemoveImage } = useNewRestaurant()
 
     return (
-        <div className="space-y-4">
-            {!image ? (
-                <label className="flex flex-col items-center justify-center w-full h-48 sm:h-64 border-2 border-dashed border-gray-300 rounded-3xl cursor-pointer hover:bg-gray-50 transition-colors">
-                    <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <AddImageIcon />
-                        <p className="text-sm text-gray-500 font-medium">Añadir imagen</p>
-                    </div>
-                    <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
-                </label>
-            ) : (
-                <div className="relative w-full h-48 sm:h-64 rounded-3xl overflow-hidden group shadow-md">
-                    <Image src={image} alt="Preview" fill className="object-cover" />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <button
-                            onClick={handleRemoveImage}
-                            className="px-6 py-2 bg-white text-black rounded-full text-sm font-medium hover:bg-red-500 hover:text-white transition-all transform translate-y-2 group-hover:translate-y-0 hover:cursor-pointer"
-                        >
-                            Eliminar imagen
-                        </button>
-                    </div>
+        <div className="w-full max-w-[400px]">
+        {!image ? (
+            <label className="flex flex-col items-center justify-center w-full aspect-square border border-gray-400 rounded-[32px] cursor-pointer hover:bg-gray-50 transition-colors bg-[#F2F2F2]">
+                <span className="text-gray-800 text-lg">Añadir imágen</span>
+                <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
+            </label>
+        ) : (
+            <div className="relative w-full aspect-square rounded-[32px] overflow-hidden group border border-gray-200 shadow-sm">
+                <Image src={image} alt="Preview" fill className="object-cover" />
+                <div className="absolute inset-0 bg-black/40 opacity-100 transition-opacity flex items-center justify-center ">
+                    <button
+                        onClick={handleRemoveImage}
+                        className="px-6 py-2  text-white rounded-full border-2 text-sm font-bold hover:bg-red-500 hover:text-white transition-all hover:cursor-pointer"
+                    >
+                        Eliminar imagen
+                    </button>
                 </div>
-            )}
-        </div>
+            </div>
+        )}
+    </div>
     )
 }
