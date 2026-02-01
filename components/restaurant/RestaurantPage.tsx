@@ -69,6 +69,12 @@ export function RestaurantPage({ id }: RestaurantPageProps) {
         </div>
     <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6 flex gap-4 justify-center">
       <button
+        onClick={() => router.push("/map")}
+        className="px-6 py-2 bg-black text-white border border-black rounded-full text-sm font-bold hover:bg-white hover:text-black transition-all transform active:scale-95 shadow-sm hover:cursor-pointer"
+      >
+        Volver al mapa
+      </button>
+      <button
         onClick={() => router.push(`/restaurant/${id}/edit`)}
         className="px-6 py-2 bg-white border border-black rounded-full text-sm font-bold hover:bg-black hover:text-white transition-all transform active:scale-95 shadow-sm hover:cursor-pointer"
       >
