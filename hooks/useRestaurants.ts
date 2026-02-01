@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { restaurantService } from '@/services/restaurantService';
+import { restaurantService, CreateReviewData } from '@/services/restaurantService';
 import { useUserStore } from '@/store/userStore';
 import type { Restaurant } from '@/domain/types';
 
@@ -66,21 +66,36 @@ export function useRestaurant(id: number | string) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = useUserStore(state => state.token);
+  const loadFromLocalStorage = useUserStore(state => state.loadFromLocalStorage);
 
+  // Primero: sincronizar con localStorage cuando el componente se monta
   useEffect(() => {
+    loadFromLocalStorage();
+  }, [loadFromLocalStorage]);
+
+  // Función para cargar el restaurante
+  const fetchRestaurant = async () => {
     if (!id || !token) {
-      setLoading(false);
+      // Si no hay token, esperar (puede que aún no se haya cargado de localStorage)
       return;
     }
 
-    restaurantService.get(id, { headers: { Authorization: token } })
-      .then(res => {
-        setRestaurant(res.data);
-        setLoading(false);
-      });
+    setLoading(true);
+    const res = await restaurantService.get(id, { headers: { Authorization: token } });
+    setRestaurant(res.data);
+    setLoading(false);
+  };
+
+  // Cargar al montar o cuando cambia id/token
+  useEffect(() => {
+    if (!token) {
+      // Esperar a que el token se cargue de localStorage
+      return;
+    }
+    fetchRestaurant();
   }, [id, token]);
 
-  return { restaurant, loading, error };
+  return { restaurant, loading, error, refetch: fetchRestaurant };
 }
 
 // Crear restaurante
@@ -136,4 +151,31 @@ export function useDeleteRestaurant() {
   };
 
   return { deleteRestaurant, loading, error };
+}
+
+// Añadir review a un restaurante
+export function useAddReview() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const token = useUserStore(state => state.token);
+
+  const addReview = async (restaurantId: number | string, review: CreateReviewData) => {
+    if (!token) return null;
+    
+    setLoading(true);
+    setError(null);
+    
+    const res = await restaurantService.addReview(restaurantId, review, { headers: { Authorization: token } });
+    
+    setLoading(false);
+    
+    if (res.error) {
+      setError(res.error);
+      return null;
+    }
+    
+    return res.data;
+  };
+
+  return { addReview, loading, error };
 }

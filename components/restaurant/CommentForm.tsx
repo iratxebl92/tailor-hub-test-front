@@ -2,17 +2,54 @@
 
 import { useState } from "react"
 
-export function CommentForm() {
+type CommentFormProps = {
+  restaurantId: string
+  userName: string
+  onReviewAdded: (review: { name: string; rating: number; comments: string }) => void
+  isSubmitting?: boolean
+}
+
+export function CommentForm({ restaurantId, userName, onReviewAdded, isSubmitting = false }: CommentFormProps) {
   const [rating, setRating] = useState(0)
+  const [comment, setComment] = useState("")
+  const [error, setError] = useState<string | null>(null)
+
+  const handleSubmit = async () => {
+    // Validaciones
+    if (rating === 0) {
+      setError("Por favor, selecciona una puntuación")
+      return
+    }
+    if (!comment.trim()) {
+      setError("Por favor, escribe un comentario")
+      return
+    }
+
+    setError(null)
+    
+    // Llamar al callback con los datos de la review
+    onReviewAdded({
+      name: userName,
+      rating,
+      comments: comment.trim(),
+    })
+
+    // Limpiar el formulario después de enviar
+    setRating(0)
+    setComment("")
+  }
 
   return (
     <div className="bg-white border border-gray-200 rounded-3xl p-6 shadow-sm">
+      <h3 className="text-lg font-semibold mb-4">Deja tu comentario</h3>
+      
       <div className="flex gap-1 mb-4">
         {[1, 2, 3, 4, 5].map((star) => (
           <button
             key={star}
             onClick={() => setRating(star)}
-            className="focus:outline-none transition-transform hover:scale-110 hover:cursor-pointer"
+            disabled={isSubmitting}
+            className="focus:outline-none transition-transform hover:scale-110 hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg
               className={`w-6 h-6 ${
@@ -31,15 +68,29 @@ export function CommentForm() {
             </svg>
           </button>
         ))}
+        <span className="ml-2 text-sm text-gray-500">
+          {rating > 0 ? `${rating}/5` : "Sin puntuar"}
+        </span>
       </div>
       
       <textarea
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
         placeholder="Escribe tu comentario sobre el restaurante"
-        className="w-full min-h-[120px] p-4 text-sm bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none mb-4"
+        disabled={isSubmitting}
+        className="w-full min-h-[120px] p-4 text-sm bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none mb-4 disabled:opacity-50"
       />
+
+      {error && (
+        <p className="text-red-500 text-sm mb-4">{error}</p>
+      )}
       
-      <button className="w-fit px-8 py-2 bg-white border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition-colors hover:cursor-pointer">
-        Enviar
+      <button 
+        onClick={handleSubmit}
+        disabled={isSubmitting}
+        className="w-fit px-8 py-2 bg-white border border-black rounded-full text-sm font-medium hover:bg-black hover:text-white transition-colors hover:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        {isSubmitting ? "Enviando..." : "Enviar"}
       </button>
     </div>
   )

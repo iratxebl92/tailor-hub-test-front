@@ -1,7 +1,8 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useDeleteRestaurant, useRestaurant } from "@/hooks/useRestaurants"
+import { useDeleteRestaurant, useRestaurant, useAddReview } from "@/hooks/useRestaurants"
+import { useUserStore } from "@/store/userStore"
 import { UserHeader } from "@/components/core/UserHeader"
 import { RestaurantHero } from "./RestaurantHero"
 import { RestaurantInfo } from "./RestaurantInfo"
@@ -16,9 +17,10 @@ type RestaurantPageProps = {
 
 export function RestaurantPage({ id }: RestaurantPageProps) {
   const router = useRouter()
-  const { restaurant, loading, error,  } = useRestaurant(id)
-  const { deleteRestaurant } = useDeleteRestaurant(id)
-  
+  const { restaurant, loading, error, refetch } = useRestaurant(id)
+  const { deleteRestaurant } = useDeleteRestaurant()
+  const { addReview, loading: addingReview } = useAddReview()
+  const user = useUserStore(state => state.user)
 
   if (loading) {
    return <LoadingSpinner />
@@ -31,12 +33,21 @@ export function RestaurantPage({ id }: RestaurantPageProps) {
       </main>
     )
   }
+
   const handleDeleteRestaurant = async (id: string) => {
     try {
       deleteRestaurant(id)
       router.push("/map")
     } catch (error) {
       console.error("Error al eliminar el restaurante", error)
+    }
+  }
+
+  const handleReviewAdded = async (review: { name: string; rating: number; comments: string }) => {
+    const result = await addReview(id, review)
+    if (result) {
+      // Refrescar los datos del restaurante para mostrar el nuevo comentario
+      refetch()
     }
   }
 
@@ -59,7 +70,12 @@ export function RestaurantPage({ id }: RestaurantPageProps) {
             <RestaurantInfo restaurant={restaurant} />
           </div>
           <div className="lg:col-span-1">
-            <CommentForm />
+            <CommentForm 
+              restaurantId={id}
+              userName={user?.username || "Anónimo"}
+              onReviewAdded={handleReviewAdded}
+              isSubmitting={addingReview}
+            />
           </div>
         </div>
 
