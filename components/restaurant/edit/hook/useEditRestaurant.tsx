@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect } from "react"
 import { useRestaurant, useUpdateRestaurant } from "@/hooks/useRestaurants"
-import { useEditRestaurantStore } from "@/store/store"
+import { useEditRestaurantStore } from "@/store/restaurantStore"
 import { useRouter } from "next/navigation"
 
 export const useEditRestaurant = (restaurantId: number | string) => {

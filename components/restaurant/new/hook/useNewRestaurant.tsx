@@ -1,7 +1,7 @@
 "use client"
 
 import { useRestaurants, useCreateRestaurant } from "@/hooks/useRestaurants"
-import { useNewRestaurantStore } from "@/store/store"
+import { useNewRestaurantStore } from "@/store/restaurantStore"
 
 export const useNewRestaurant = () => {
     // Estado desde Zustand

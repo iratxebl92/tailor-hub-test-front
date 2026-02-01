@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useRestaurants } from "@/hooks/useRestaurants"
-import { useRestaurantStore } from "@/store/store"
+import { useRestaurantUIStore } from "@/store/restaurantStore"
 import { RestaurantCard } from "./RestaurantCard"
 import type { Restaurant, RestaurantCardType } from "@/domain/restaurants.type"
 
@@ -32,8 +32,8 @@ export function RestaurantList() {
   
   const { restaurants, loading, error } = useRestaurants()
 
-  const selectedId = useRestaurantStore((state) => state.selectedRestaurantId)
-  const setSelectedId = useRestaurantStore((state) => state.setSelectedRestaurantId)
+  const selectedId = useRestaurantUIStore((state) => state.selectedRestaurantId)
+  const setSelectedId = useRestaurantUIStore((state) => state.setSelectedRestaurantId)
 
   const handleRestaurantClick = (restaurantId: number) => {
     setSelectedId(restaurantId)

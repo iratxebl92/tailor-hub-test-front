@@ -4,11 +4,11 @@ import Link from "next/link"
 import { Logo } from "../Icons/Logo"
 import { RegisterStepOne } from "./RegisterSteps/RegisterStepOne"
 import { RegisterStepTwo } from "./RegisterSteps/RegisterStepTwo"
-import { useUserStore } from "@/store/userStore"
+import { useAuthStore } from "@/store/authStore"
 import { useRegister, useLogin } from "@/hooks/useAuth"
 
 export const RegisterForm = () => {
-  const { registerStep, registerForm, setAuthData, resetRegisterForm } = useUserStore()
+  const { registerStep, registerForm, setAuthData, resetRegisterForm } = useAuthStore()
   const { register, loading: registerLoading, error: registerError } = useRegister()
   const { login, loading: loginLoading, error: loginError } = useLogin()
 

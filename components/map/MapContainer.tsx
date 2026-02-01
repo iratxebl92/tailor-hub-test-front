@@ -5,7 +5,7 @@ import dynamic from "next/dynamic"
 import mapboxgl from "mapbox-gl"
 import "mapbox-gl/dist/mapbox-gl.css"
 import { useRestaurants } from "@/hooks/useRestaurants"
-import { useRestaurantStore } from "@/store/store"
+import { useRestaurantUIStore } from "@/store/restaurantStore"
 
 mapboxgl.accessToken = "pk.eyJ1IjoiaXJhdHhlYmwiLCJhIjoiY21remw0ZWMzMDMxajNkc2RtMTlvcTk2diJ9.v6HQuQPUiCMBKjjGe8prxQ"
 
@@ -17,7 +17,7 @@ function Map() {
   const markers = useRef<mapboxgl.Marker[]>([]) // Lista simple de marcadores
 
   const { restaurants } = useRestaurants()
-  const { selectedRestaurantId, setSelectedRestaurantId } = useRestaurantStore()
+  const { selectedRestaurantId, setSelectedRestaurantId } = useRestaurantUIStore()
 
   // 1. CREAR EL MAPA (Solo se ejecuta una vez al cargar)
   useEffect(() => {

@@ -2,7 +2,7 @@
 
 import { EyeIcon } from '@/components/Icons/EyeIcon'
 import { EyeOffIcon } from '@/components/Icons/EyeOffIcon'
-import { useUserStore } from '@/store/userStore'
+import { useAuthStore } from '@/store/authStore'
 import { useState } from 'react'
 import { LoadingSpinner } from '@/components/core/LoadingSpinner'
 interface RegisterStepTwoProps {
@@ -12,7 +12,7 @@ interface RegisterStepTwoProps {
 }
 
 export const RegisterStepTwo = ({ onSubmit, loading, error }: RegisterStepTwoProps) => {
-  const { registerForm, setRegisterPassword, setRegisterStep } = useUserStore()
+  const { registerForm, setRegisterPassword, setRegisterStep } = useAuthStore()
   const [showPassword, setShowPassword] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {

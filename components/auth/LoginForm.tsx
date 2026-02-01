@@ -4,11 +4,11 @@ import { useState } from "react"
 import { Logo } from "../Icons/Logo"
 import Link from "next/link"
 import { useLogin } from "@/hooks/useAuth"
-import { useUserStore } from "@/store/userStore"
+import { useAuthStore } from "@/store/authStore"
 
 export const LoginForm = () => {
   const { login, loading, error } = useLogin()
-  const setAuthData = useUserStore((state) => state.setAuthData)
+  const setAuthData = useAuthStore((state) => state.setAuthData)
   
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")

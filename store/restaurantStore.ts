@@ -1,23 +1,28 @@
 import { create } from "zustand"
 
-type RestaurantStore = {
+// ============================================
+// RESTAURANT UI STORE
+// ============================================
+
+interface RestaurantUIStore {
   isUserMenuOpen: boolean
   setIsUserMenuOpen: (isOpen: boolean) => void
   selectedRestaurantId: number | null
   setSelectedRestaurantId: (id: number | null) => void
 }
 
-//Store general de la aplicación
-
-export const useRestaurantStore = create<RestaurantStore>((set) => ({
+export const useRestaurantUIStore = create<RestaurantUIStore>((set) => ({
   isUserMenuOpen: false,
   setIsUserMenuOpen: (isOpen) => set({ isUserMenuOpen: isOpen }),
   selectedRestaurantId: null,
   setSelectedRestaurantId: (id) => set({ selectedRestaurantId: id }),
 }))
 
-// Store para nuevo restaurante
-type NewRestaurantStore = {
+// ============================================
+// NEW RESTAURANT STORE
+// ============================================
+
+interface NewRestaurantStore {
   name: string
   address: string
   description: string
@@ -61,8 +66,11 @@ export const useNewRestaurantStore = create<NewRestaurantStore>((set) => ({
   }),
 }))
 
-// Store para editar restaurante
-type EditRestaurantStore = {
+// ============================================
+// EDIT RESTAURANT STORE
+// ============================================
+
+interface EditRestaurantStore {
   id: number | null
   name: string
   address: string

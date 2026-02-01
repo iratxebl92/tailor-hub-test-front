@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useDeleteRestaurant, useRestaurant, useAddReview } from "@/hooks/useRestaurants"
-import { useUserStore } from "@/store/userStore"
+import { useAuthStore } from "@/store/authStore"
 import { UserHeader } from "@/components/core/UserHeader"
 import { RestaurantHero } from "./RestaurantHero"
 import { RestaurantInfo } from "./RestaurantInfo"
@@ -20,7 +20,7 @@ export function RestaurantPage({ id }: RestaurantPageProps) {
   const { restaurant, loading, error, refetch } = useRestaurant(id)
   const { deleteRestaurant } = useDeleteRestaurant()
   const { addReview, loading: addingReview } = useAddReview()
-  const user = useUserStore(state => state.user)
+  const user = useAuthStore(state => state.user)
 
   if (loading) {
    return <LoadingSpinner />

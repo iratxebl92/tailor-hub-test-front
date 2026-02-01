@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { restaurantService, CreateReviewData } from '@/services/restaurantService';
-import { useUserStore } from '@/store/userStore';
+import { useAuthStore } from '@/store/authStore';
 import type { Restaurant } from '@/domain/restaurants.type';
 
 // Obtener restaurantes del usuario
@@ -10,9 +10,9 @@ export function useRestaurants() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const token = useUserStore(state => state.token);
-  const logout = useUserStore(state => state.logout);
-  const validateAndLoadToken = useUserStore(state => state.validateAndLoadToken);
+  const token = useAuthStore(state => state.token);
+  const logout = useAuthStore(state => state.logout);
+  const validateAndLoadToken = useAuthStore(state => state.validateAndLoadToken);
 
   // Primero: validar token con el servidor cuando el componente se monta
   useEffect(() => {
@@ -60,9 +60,9 @@ export function useRestaurant(id: number | string) {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const token = useUserStore(state => state.token);
-  const logout = useUserStore(state => state.logout);
-  const validateAndLoadToken = useUserStore(state => state.validateAndLoadToken);
+  const token = useAuthStore(state => state.token);
+  const logout = useAuthStore(state => state.logout);
+  const validateAndLoadToken = useAuthStore(state => state.validateAndLoadToken);
 
   // Primero: validar token con el servidor cuando el componente se monta
   useEffect(() => {
@@ -103,7 +103,7 @@ export function useRestaurant(id: number | string) {
 export function useCreateRestaurant() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const token = useUserStore(state => state.token);
+  const token = useAuthStore(state => state.token);
 
   const createRestaurant = async (data: Omit<Restaurant, 'id'>) => {
     if (!token) return null;
@@ -122,7 +122,7 @@ export function useCreateRestaurant() {
 export function useUpdateRestaurant() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const token = useUserStore(state => state.token);
+  const token = useAuthStore(state => state.token);
 
   const updateRestaurant = async (id: number | string, data: Omit<Restaurant, 'id'>) => {
     if (!token) return null;
@@ -140,7 +140,7 @@ export function useUpdateRestaurant() {
 export function useDeleteRestaurant() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const token = useUserStore(state => state.token);
+  const token = useAuthStore(state => state.token);
 
   const deleteRestaurant = async (id: number | string) => {
     if (!token) return false;
@@ -158,7 +158,7 @@ export function useDeleteRestaurant() {
 export function useAddReview() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const token = useUserStore(state => state.token);
+  const token = useAuthStore(state => state.token);
 
   const addReview = async (restaurantId: number | string, review: CreateReviewData) => {
     if (!token) return null;

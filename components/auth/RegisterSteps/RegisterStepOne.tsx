@@ -1,6 +1,6 @@
 "use client"
 
-import { useUserStore } from '@/store/userStore'
+import { useAuthStore } from '@/store/authStore'
 import { useRouter } from 'next/navigation'
 
 export const RegisterStepOne = () => {
@@ -10,7 +10,7 @@ export const RegisterStepOne = () => {
     setRegisterEmail, 
     setRegisterUsername, 
     setRegisterStep 
-  } = useUserStore()
+  } = useAuthStore()
 
   const handleNext = (e: React.FormEvent) => {
     e.preventDefault()

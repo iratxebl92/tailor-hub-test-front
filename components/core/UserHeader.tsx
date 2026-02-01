@@ -1,15 +1,15 @@
 "use client"
 
 import Link from "next/link"
-import { useRestaurantStore } from "@/store/store"
+import { useRestaurantUIStore } from "@/store/restaurantStore"
 import { UserArrow } from "../Icons/UserArrow"
-import { useUserStore } from "@/store/userStore"
+import { useAuthStore } from "@/store/authStore"
 import { useRouter } from "next/navigation"
 
 export function UserHeader() {
   const router = useRouter()
-  const { isUserMenuOpen, setIsUserMenuOpen } = useRestaurantStore()
-  const { user, token, logout, isAuthenticated } = useUserStore()
+  const { isUserMenuOpen, setIsUserMenuOpen } = useRestaurantUIStore()
+  const { user, logout, isAuthenticated } = useAuthStore()
 
   const handleClickUserMenu = () => {
     if (!isAuthenticated) router.push('/login')
