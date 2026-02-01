@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { authService, User } from '@/services/authService';
+import { authService } from '@/services/authService';
+import type { User } from '@/domain/users.type';
 
 // Hook para login
 
