@@ -1,6 +1,6 @@
 "use client"
 
-import type { Restaurant } from "@/domain/types"
+import type { Restaurant } from "@/domain/restaurants.type"
 
 type RestaurantInfoProps = {
   restaurant: Restaurant

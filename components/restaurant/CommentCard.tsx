@@ -1,6 +1,6 @@
 "use client"
 
-import type { Comment } from "@/domain/types"
+import type { Comment } from "@/domain/restaurants.type"
 
 type CommentCardProps = {
   comment: Comment

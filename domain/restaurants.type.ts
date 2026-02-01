@@ -33,7 +33,7 @@ export interface Restaurant {
   reviews: Review[];
 }
 
-export type RestaurantCard = {
+export type RestaurantCardType = {
   id: number;
   name: string;
   address: string;

@@ -1,40 +1,12 @@
 import { api, ApiResponse, RequestOptions } from './api';
-
-// Types
-export interface User {
-  id: number
-  username: string
-  email?: string
-}
-
-export interface LoginRequest {
-  username: string
-  password: string
-}
-
-export interface RegisterRequest {
-  username: string
-  password: string
-}
-
-export interface LoginResponse {
-  token: string
-  user?: User
-}
-
-export interface RegisterResponse {
-  id: number
-  username: string
-}
-
-// Respuesta del endpoint de validación
-export interface ValidateResponse {
-  valid: boolean
-  user?: {
-    id: number
-    username: string
-  }
-}
+import type { 
+  User, 
+  LoginRequest, 
+  RegisterRequest, 
+  LoginResponse, 
+  RegisterResponse, 
+  ValidateResponse 
+} from '@/domain/users.type';
 
 const AUTH_ENDPOINT = '/auth';
 

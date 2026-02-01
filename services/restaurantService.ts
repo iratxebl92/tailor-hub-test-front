@@ -1,5 +1,5 @@
 import { api, ApiResponse, RequestOptions } from './api';
-import type { Restaurant, Review } from '@/domain/types';
+import type { Restaurant } from '@/domain/restaurants.type';
 
 const RESTAURANTS_ENDPOINT = '/restaurants';
 

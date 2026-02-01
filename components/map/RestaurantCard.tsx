@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { useState } from "react"
 import { Stars } from "../Icons/Stars"
-import type { RestaurantCard as RestaurantCardType } from "@/domain/types"
+import type { RestaurantCardType} from "@/domain/restaurants.type"
 
 const DEFAULT_IMAGE = "/images/default-image.avif"
 

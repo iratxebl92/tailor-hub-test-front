@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { restaurantService, CreateReviewData } from '@/services/restaurantService';
 import { useUserStore } from '@/store/userStore';
-import type { Restaurant } from '@/domain/types';
+import type { Restaurant } from '@/domain/restaurants.type';
 
 // Obtener restaurantes del usuario
 export function useRestaurants() {

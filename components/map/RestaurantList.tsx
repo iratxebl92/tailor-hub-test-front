@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation"
 import { useRestaurants } from "@/hooks/useRestaurants"
 import { useRestaurantStore } from "@/store/store"
 import { RestaurantCard } from "./RestaurantCard"
-import type { Restaurant, RestaurantCard as RestaurantCardType } from "@/domain/types"
-import { LoadingSpinner } from "../core/LoadingSpinner"
+import type { Restaurant, RestaurantCardType } from "@/domain/restaurants.type"
+
 
 // Calcula el promedio de las calificaciones de un restaurante
 function calculateAverageRating(reviews: Restaurant["reviews"]): number {
