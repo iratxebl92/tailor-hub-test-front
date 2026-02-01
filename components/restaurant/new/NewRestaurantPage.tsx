@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import { UserHeader } from "@/components/core/UserHeader"
 import { ImageUploader } from "./ImageUploader"
 import { NewRestaurantForm } from "./NewRestaurantForm"
@@ -9,7 +10,12 @@ import { useNewRestaurant } from "./hook/useNewRestaurant"
 import { LoadingSpinner } from "@/components/core/LoadingSpinner"
 
 export function NewRestaurantPage() {
-    const { isSaved, loading } = useNewRestaurant()
+    const { isSaved, loading, handleReset } = useNewRestaurant()
+
+    // Resetear el formulario al entrar a la página
+    useEffect(() => {
+        handleReset()
+    }, [])
 
     if (loading) {
         return (

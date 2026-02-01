@@ -5,15 +5,23 @@ import { useRestaurantStore } from "@/store/store"
 import { UserArrow } from "../Icons/UserArrow"
 import { useUserStore } from "@/store/userStore"
 import { useRouter } from "next/navigation"
+
 export function UserHeader() {
   const router = useRouter()
   const { isUserMenuOpen, setIsUserMenuOpen } = useRestaurantStore()
-  const { user, token } = useUserStore()
-  console.log(user, token)
+  const { user, token, logout, isAuthenticated } = useUserStore()
+
   const handleClickUserMenu = () => {
-    if (!user?.id || !token) router.push('/login')
+    if (!isAuthenticated) router.push('/login')
     setIsUserMenuOpen(false)
   }
+
+  const handleLogout = () => {
+    logout()
+    setIsUserMenuOpen(false)
+    router.push('/login')
+  }
+
   return (
     <div className="flex justify-end items-center relative">
       <div className="relative">
@@ -24,7 +32,7 @@ export function UserHeader() {
           aria-label="User menu"
           aria-expanded={isUserMenuOpen}
         >
-          <span>Nombre usuario</span>
+          <span>{user?.username || "Iniciar sesión"}</span>
           <UserArrow />
         </button>
 
@@ -49,23 +57,26 @@ export function UserHeader() {
 
               <div className="my-2 border-t border-white/20 mx-4" />
 
-              {
-                user?.id && token && (
-                  <div className="p-2">
-                    <button
-                      onClick={() => {
-                        //TODO: Implementar la lógica de logout
-                        setIsUserMenuOpen(false)
-                      }}
-                      className="w-full py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-sm hover:cursor-pointer"
-                    >
-                      Salir
-                    </button>
-                  </div>
-                )
-
-
-              }
+              {isAuthenticated ? (
+                <div className="p-2">
+                  <button
+                    onClick={handleLogout}
+                    className="w-full py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-sm hover:cursor-pointer"
+                  >
+                    Salir
+                  </button>
+                </div>
+              ) : (
+                <div className="p-2">
+                  <Link
+                    href="/login"
+                    onClick={() => setIsUserMenuOpen(false)}
+                    className="block w-full py-2.5 bg-white text-black text-sm font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-sm text-center"
+                  >
+                    Iniciar sesión
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         )}

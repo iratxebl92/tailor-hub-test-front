@@ -1,7 +1,6 @@
 'use client'
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { Logo } from "../Icons/Logo"
 import { RegisterStepOne } from "./RegisterSteps/RegisterStepOne"
 import { RegisterStepTwo } from "./RegisterSteps/RegisterStepTwo"
@@ -9,7 +8,6 @@ import { useUserStore } from "@/store/userStore"
 import { useRegister, useLogin } from "@/hooks/useAuth"
 
 export const RegisterForm = () => {
-  const router = useRouter()
   const { registerStep, registerForm, setAuthData, resetRegisterForm } = useUserStore()
   const { register, loading: registerLoading, error: registerError } = useRegister()
   const { login, loading: loginLoading, error: loginError } = useLogin()
@@ -25,10 +23,12 @@ export const RegisterForm = () => {
 
     // 3. Guardar datos de auth en el store
     setAuthData(token, user)
-    
-    // 4. Limpiar formulario y redirigir
     resetRegisterForm()
-    router.push('/map')
+    
+    // 4. Pequeño delay para asegurar que la cookie se escriba, luego redirigir
+    setTimeout(() => {
+      window.location.href = '/map'
+    }, 100)
   }
 
   const loading = registerLoading || loginLoading
