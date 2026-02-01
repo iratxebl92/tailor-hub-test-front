@@ -12,18 +12,17 @@ export function useRestaurants() {
   const [error, setError] = useState<string | null>(null);
   const token = useUserStore(state => state.token);
   const logout = useUserStore(state => state.logout);
-  const loadFromLocalStorage = useUserStore(state => state.loadFromLocalStorage);
+  const validateAndLoadToken = useUserStore(state => state.validateAndLoadToken);
 
-  // Primero: sincronizar con localStorage cuando el componente se monta
+  // Primero: validar token con el servidor cuando el componente se monta
   useEffect(() => {
-    loadFromLocalStorage();
-  }, [loadFromLocalStorage]);
+    validateAndLoadToken();
+  }, [validateAndLoadToken]);
 
   // Segundo: cargar restaurantes cuando hay token
   useEffect(() => {
-    // Si no hay token, esperar (puede que aún no se haya cargado de localStorage)
+    // Si no hay token, esperar (puede que aún no se haya validado)
     if (!token) {
-      // No hacer nada, esperar a que loadFromLocalStorage actualice el token
       return;
     }
 
@@ -31,19 +30,15 @@ export function useRestaurants() {
     setLoading(true);
     setError(null);
     
-    console.log("useRestaurants - Haciendo request con token:", token)
-    
     restaurantService.getAll({ headers: { Authorization: token } })
       .then(res => {
-        console.log("useRestaurants - Respuesta:", res)
-        
         if (res.error) {
-          console.log("useRestaurants - Error del servidor:", res.error, "status:", res.status)
-          // TEMPORALMENTE DESHABILITADO: No hacer logout automático
-          // if (res.status === 401 || res.error.includes('Unauthorized')) {
-          //   logout();
-          //   return;
-          // }
+          // Si el servidor devuelve 401, el token ya no es válido
+          // Esto pasa si el servidor se reinició
+          if (res.status === 401 || res.error.includes('Unauthorized')) {
+            logout();
+            return;
+          }
           setError(res.error);
           setRestaurants([]);
         } else {
@@ -66,22 +61,29 @@ export function useRestaurant(id: number | string) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const token = useUserStore(state => state.token);
-  const loadFromLocalStorage = useUserStore(state => state.loadFromLocalStorage);
+  const logout = useUserStore(state => state.logout);
+  const validateAndLoadToken = useUserStore(state => state.validateAndLoadToken);
 
-  // Primero: sincronizar con localStorage cuando el componente se monta
+  // Primero: validar token con el servidor cuando el componente se monta
   useEffect(() => {
-    loadFromLocalStorage();
-  }, [loadFromLocalStorage]);
+    validateAndLoadToken();
+  }, [validateAndLoadToken]);
 
   // Función para cargar el restaurante
   const fetchRestaurant = async () => {
     if (!id || !token) {
-      // Si no hay token, esperar (puede que aún no se haya cargado de localStorage)
       return;
     }
 
     setLoading(true);
     const res = await restaurantService.get(id, { headers: { Authorization: token } });
+    
+    // Si el servidor devuelve error 401, cerrar sesión
+    if (res.status === 401) {
+      logout();
+      return;
+    }
+    
     setRestaurant(res.data);
     setLoading(false);
   };
@@ -89,7 +91,6 @@ export function useRestaurant(id: number | string) {
   // Cargar al montar o cuando cambia id/token
   useEffect(() => {
     if (!token) {
-      // Esperar a que el token se cargue de localStorage
       return;
     }
     fetchRestaurant();

@@ -1,5 +1,6 @@
 import { create } from "zustand"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import { authService } from "@/services/authService"
 
 // Tipos
 export interface User {
@@ -22,8 +23,8 @@ interface UserStore {
   setAuthData: (token: string, user: User) => void
   logout: () => void
   
-  // Función para cargar desde localStorage (llamada manualmente en cliente)
-  loadFromLocalStorage: () => void
+  // Función para validar y cargar desde localStorage
+  validateAndLoadToken: () => Promise<boolean>
 
   // Registro
   registerStep: 1 | 2
@@ -77,16 +78,49 @@ function clearStorage() {
 // ============================================
 
 export const useUserStore = create<UserStore>((set) => ({
-  // Auth - estado inicial vacío (se carga desde localStorage en el cliente)
+  // Auth - estado inicial vacío (se valida con el servidor en el cliente)
   token: null,
   user: null,
   isAuthenticated: false,
 
-  // Cargar datos desde localStorage (llamar en useEffect del cliente)
-  loadFromLocalStorage: () => {
-    const { token, user } = loadFromStorage()
-    if (token && user) {
-      set({ token, user, isAuthenticated: true })
+  // ========================================
+  // VALIDAR TOKEN CON EL SERVIDOR
+  // Si el servidor se reinició, el token será inválido
+  // y limpiamos la cookie + localStorage
+  // ========================================
+  validateAndLoadToken: async () => {
+    const { token } = loadFromStorage()
+    
+    // Si no hay token guardado, no hay nada que validar
+    if (!token) {
+      return false
+    }
+
+    try {
+      // Preguntar al servidor si el token es válido
+      const response = await authService.validateToken(token)
+      
+      if (response.data?.valid && response.data?.user) {
+        // Token válido - el usuario existe en el servidor
+        const user = response.data.user
+        set({ token, user, isAuthenticated: true })
+        return true
+      } else {
+        // Token inválido - el servidor se reinició o el usuario no existe
+        // Limpiamos todo y redirigimos a login
+        console.log("[Auth] Token inválido - limpiando sesión")
+        deleteTokenCookie()
+        clearStorage()
+        set({ user: null, token: null, isAuthenticated: false })
+        return false
+      }
+    } catch {
+      // Error de conexión - limpiamos por seguridad
+      console.log("[Auth] Error validando token - limpiando sesión")
+      deleteTokenCookie()
+      clearStorage()
+      set({ user: null, token: null, isAuthenticated: false })
+      return false
     }
   },
 
@@ -128,17 +162,37 @@ export const useUserStore = create<UserStore>((set) => ({
 }))
 
 // ============================================
-// HOOK PARA SINCRONIZAR CON LOCALSTORAGE
+// HOOK PARA VALIDAR SESIÓN AL CARGAR LA APP
 // ============================================
-// Usar este hook en componentes que necesitan el estado de auth
+// Este hook valida con el servidor si el token es válido
+// Si el servidor se reinició, redirige a login
 export function useAuthSync() {
-  const loadFromLocalStorage = useUserStore((state) => state.loadFromLocalStorage)
-  const token = useUserStore((state) => state.token)
+  const validateAndLoadToken = useUserStore((state) => state.validateAndLoadToken)
+  const isAuthenticated = useUserStore((state) => state.isAuthenticated)
+  const [isValidating, setIsValidating] = useState(true)
   
   useEffect(() => {
-    // Cargar desde localStorage cuando el componente se monta en el cliente
-    loadFromLocalStorage()
-  }, [loadFromLocalStorage])
+    // Validar el token con el servidor cuando la app carga
+    const validate = async () => {
+      const isValid = await validateAndLoadToken()
+      setIsValidating(false)
+      
+      // Si el token no es válido y estamos en una ruta protegida, redirigir a login
+      if (!isValid && typeof window !== "undefined") {
+        const publicRoutes = ["/", "/login", "/register"]
+        const currentPath = window.location.pathname
+        
+        if (!publicRoutes.includes(currentPath)) {
+          window.location.href = "/login"
+        }
+      }
+    }
+    
+    validate()
+  }, [validateAndLoadToken])
   
-  return { isLoaded: token !== null }
+  return { 
+    isLoaded: !isValidating,
+    isAuthenticated 
+  }
 }

@@ -27,6 +27,15 @@ export interface RegisterResponse {
   username: string
 }
 
+// Respuesta del endpoint de validación
+export interface ValidateResponse {
+  valid: boolean
+  user?: {
+    id: number
+    username: string
+  }
+}
+
 const AUTH_ENDPOINT = '/auth';
 
 export const authService = {
@@ -50,6 +59,20 @@ export const authService = {
     return api.post<RegisterResponse, RegisterRequest>(
       `${AUTH_ENDPOINT}/register`, 
       userData, 
+      options
+    );
+  },
+
+  // POST /auth/validate
+  // Verifica si un token es válido (si el usuario existe en el servidor)
+  // Útil para cuando el servidor se reinicia y las cookies del navegador siguen existiendo
+  async validateToken(
+    token: string,
+    options?: RequestOptions
+  ): Promise<ApiResponse<ValidateResponse>> {
+    return api.post<ValidateResponse, { token: string }>(
+      `${AUTH_ENDPOINT}/validate`,
+      { token },
       options
     );
   },
