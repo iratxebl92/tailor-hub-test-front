@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tailor-Hub Test Frontend
+
+A responsive web application built as a technical assessment for **Tailor-Hub**. The project follows a **mobile-first** approach and is developed with modern frontend tools and testing practices.
+
+## Tech Stack
+
+- **[Next.js](https://nextjs.org)** (App Router) – React framework for production
+- **[TypeScript](https://www.typescriptlang.org/)** – Typed JavaScript
+- **[Tailwind CSS](https://tailwindcss.com/)** – Utility-first CSS
+- **Testing** – [Vitest](https://vitest.dev/) with [Testing Library](https://testing-library.com/react) for unit and component tests
+- **State** – [Zustand](https://zustand-demo.pmnd.rs/) for client state
+- **ESLint** – Linting
 
 ## Getting Started
 
-First, run the development server:
+Clone the repo, open the project, and install dependencies:
+
+```bash
+git clone <https://github.com/iratxebl92/tailor-hub-test-front>
+cd tailor-hub-test-front
+code .
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How it looks
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend (live):** [tailor-hub-test-front.vercel.app](https://tailor-hub-test-front.vercel.app/)
+- **Backend (API):** [tailor-hub-test-back.onrender.com](https://tailor-hub-test-back.onrender.com/)
+- **Local:** After `npm run dev`, open [http://localhost:3000](http://localhost:3000) in your browser.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Command        | Description              |
+|----------------|--------------------------|
+| `npm run dev`  | Start dev server         |
+| `npm run build`| Build for production     |
+| `npm run start`| Start production server  |
+| `npm run test` | Run tests (Vitest)       |
+| `npm run test:run` | Run tests once       |
+| `npm run lint` | Run ESLint               |
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Endpoint Table
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Client (Frontend routes)
+| Verb | Endpoint | Description |
+|------|----------|-------------|
+| GET | `/` | Home / landing page |
+| GET | `/login` | Login page |
+| GET | `/register` | Registration page |
+| GET | `/map` | Map with restaurant list |
+| GET | `/profile` | User profile page |
+| GET | `/restaurant/new` | New restaurant form |
+| GET | `/restaurant/[id]` | Restaurant detail page |
+| GET | `/restaurant/[id]/edit` | Edit restaurant page |
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+tailor-hub-test-front/
+├── app/                    # Next.js App Router
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx            # Home
+│   ├── login/page.tsx
+│   ├── map/page.tsx
+│   ├── profile/page.tsx
+│   ├── register/page.tsx
+│   └── restaurant/
+│       ├── [id]/
+│       │   ├── page.tsx
+│       │   └── edit/page.tsx
+│       └── new/page.tsx
+├── components/
+│   ├── auth/               # Login, register, steps
+│   │   ├── __tests__/
+│   │   ├── LoginForm.tsx
+│   │   ├── RegisterForm.tsx
+│   │   └── RegisterSteps/
+│   ├── core/               # Footer, LoadingSpinner, UserHeader
+│   │   ├── __tests__/
+│   │   └── index.ts
+│   ├── home/               # HomePage, LandingScreen, onboarding
+│   ├── Icons/
+│   ├── layouts/
+│   ├── map/                # MapContainer, RestaurantCard, RestaurantList
+│   ├── profile/
+│   └── restaurant/         # Detail, comments, new, edit
+│       ├── edit/           # EditRestaurantForm, hook
+│       └── new/            # NewRestaurantForm, ImageUploader, hook
+├── domain/                 # Types (restaurants, users)
+├── hooks/                  # useAuth, useRestaurants
+├── public/images/
+├── services/               # api, authService, restaurantService
+├── store/                  # authStore, restaurantStore (Zustand)
+├── middleware.ts
+├── next.config.ts
+├── vitest.config.ts
+└── vitest.setup.ts
+```
+
+## Author
+
+👤 **Iratxe Barrio**
