@@ -22,6 +22,16 @@ code .
 npm install
 ```
 
+Crea un archivo **`.env`** en la raíz del proyecto con estas variables (sustituye los valores por los tuyos):
+
+```env
+NEXT_PUBLIC_MAPBOX_TOKEN=<tu_token_de_mapbox>
+NEXT_PUBLIC_API_URL=https://tailor-hub-test-back.onrender.com
+```
+
+- **NEXT_PUBLIC_MAPBOX_TOKEN:** token público de [Mapbox](https://www.mapbox.com/) para el mapa.
+- **NEXT_PUBLIC_API_URL:** URL base del backend (por defecto la API de prueba indicada).
+
 Run the development server:
 
 ```bash
