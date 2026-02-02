@@ -17,8 +17,13 @@ describe("RegisterStepTwo", () => {
   });
 
   it("shows Finalizar button when not loading", () => {
-    render(<RegisterStepTwo onSubmit={vi.fn()} loading={false} error={null} />);
-    expect(screen.getByRole("button", { name: "Finalizar" })).toBeInTheDocument();
+    const callback = vi.fn();
+    
+    render(<RegisterStepTwo onSubmit={callback} loading={false} error={null} />);
+    const button = screen.getByRole("button", { name: "Finalizar" });
+    expect(button).toBeInTheDocument();
+    button.click()
+    expect(callback).toHaveBeenCalled();
   });
 
   it("shows error message when error prop is passed", () => {
