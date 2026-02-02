@@ -30,7 +30,7 @@ export function UserHeader() {
           type="button"
           className="flex items-center gap-2 text-sm sm:text-base font-medium text-black hover:opacity-70 transition-opacity hover:cursor-pointer"
           aria-label="User menu"
-          aria-expanded={isUserMenuOpen}
+
         >
           <span>{user?.username || "Iniciar sesión"}</span>
           <UserArrow />
@@ -44,6 +44,7 @@ export function UserHeader() {
                 href="/profile"
                 className="block px-4 py-3 text-sm text-white hover:bg-white/10 rounded-xl transition-colors"
                 onClick={handleClickUserMenu}
+                aria-label="My account"
               >
                 Mi cuenta
               </Link>
@@ -51,6 +52,7 @@ export function UserHeader() {
                 href="/restaurant/new"
                 className="block px-4 py-3 text-sm text-white hover:bg-white/10 rounded-xl transition-colors"
                 onClick={handleClickUserMenu}
+                aria-label="Add restaurant"
               >
                 Añadir restaurante
               </Link>
