@@ -14,7 +14,7 @@ function calculateAverageRating(reviews: Restaurant["reviews"]): number {
   return Math.round(total / reviews.length)
 }
 
-// Transforma los datos del restaurante al formato que necesita la card
+
 function toCardFormat(restaurant: Restaurant): RestaurantCardType {
   return {
     id: restaurant.id,

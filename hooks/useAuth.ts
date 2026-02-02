@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { authService } from '@/services/authService';
 import type { User } from '@/domain/users.type';
 
-// Hook para login
 
 
 export function useLogin() {
@@ -30,7 +29,7 @@ export function useLogin() {
   return { login, loading, error };
 }
 
-// Hook para register
+
 export function useRegister() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);

@@ -15,7 +15,6 @@ export function CommentForm({ restaurantId, userName, onReviewAdded, isSubmittin
   const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async () => {
-    // Validaciones
     if (rating === 0) {
       setError("Por favor, selecciona una puntuación")
       return
@@ -34,7 +33,6 @@ export function CommentForm({ restaurantId, userName, onReviewAdded, isSubmittin
       comments: comment.trim(),
     })
 
-    // Limpiar el formulario después de enviar
     setRating(0)
     setComment("")
   }

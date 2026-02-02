@@ -5,7 +5,7 @@ import { restaurantService, CreateReviewData } from '@/services/restaurantServic
 import { useAuthStore } from '@/store/authStore';
 import type { Restaurant } from '@/domain/restaurants.type';
 
-// Obtener restaurantes del usuario
+// Los restaurantes del usuario
 export function useRestaurants() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
@@ -14,19 +14,18 @@ export function useRestaurants() {
   const logout = useAuthStore(state => state.logout);
   const validateAndLoadToken = useAuthStore(state => state.validateAndLoadToken);
 
-  // Primero: validar token con el servidor cuando el componente se monta
+  //Validar token 
   useEffect(() => {
     validateAndLoadToken();
   }, [validateAndLoadToken]);
 
-  // Segundo: cargar restaurantes cuando hay token
   useEffect(() => {
     // Si no hay token, esperar (puede que aún no se haya validado)
     if (!token) {
       return;
     }
 
-    // Cargar restaurantes
+ 
     setLoading(true);
     setError(null);
     
@@ -34,7 +33,6 @@ export function useRestaurants() {
       .then(res => {
         if (res.error) {
           // Si el servidor devuelve 401, el token ya no es válido
-          // Esto pasa si el servidor se reinició
           if (res.status === 401 || res.error.includes('Unauthorized')) {
             logout();
             return;
@@ -55,7 +53,7 @@ export function useRestaurants() {
   return { restaurants, loading, error };
 }
 
-// Obtener un restaurante
+// Un restaurante
 export function useRestaurant(id: number | string) {
   const [restaurant, setRestaurant] = useState<Restaurant | null>(null);
   const [loading, setLoading] = useState(true);
@@ -64,12 +62,11 @@ export function useRestaurant(id: number | string) {
   const logout = useAuthStore(state => state.logout);
   const validateAndLoadToken = useAuthStore(state => state.validateAndLoadToken);
 
-  // Primero: validar token con el servidor cuando el componente se monta
+
   useEffect(() => {
     validateAndLoadToken();
   }, [validateAndLoadToken]);
 
-  // Función para cargar el restaurante
   const fetchRestaurant = async () => {
     if (!id || !token) {
       return;
@@ -78,7 +75,6 @@ export function useRestaurant(id: number | string) {
     setLoading(true);
     const res = await restaurantService.get(id, { headers: { Authorization: token } });
     
-    // Si el servidor devuelve error 401, cerrar sesión
     if (res.status === 401) {
       logout();
       return;
@@ -88,7 +84,6 @@ export function useRestaurant(id: number | string) {
     setLoading(false);
   };
 
-  // Cargar al montar o cuando cambia id/token
   useEffect(() => {
     if (!token) {
       return;

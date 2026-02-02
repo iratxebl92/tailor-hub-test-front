@@ -11,7 +11,7 @@ import type {
 const AUTH_ENDPOINT = '/auth';
 
 export const authService = {
-  // POST /auth/login
+
   async login(
     credentials: LoginRequest, 
     options?: RequestOptions
@@ -23,7 +23,6 @@ export const authService = {
     );
   },
 
-  // POST /auth/register
   async register(
     userData: RegisterRequest, 
     options?: RequestOptions
@@ -37,7 +36,6 @@ export const authService = {
 
   // POST /auth/validate
   // Verifica si un token es válido (si el usuario existe en el servidor)
-  // Útil para cuando el servidor se reinicia y las cookies del navegador siguen existiendo
   async validateToken(
     token: string,
     options?: RequestOptions

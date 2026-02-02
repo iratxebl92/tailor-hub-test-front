@@ -4,7 +4,7 @@ import { useRestaurants, useCreateRestaurant } from "@/hooks/useRestaurants"
 import { useNewRestaurantStore } from "@/store/restaurantStore"
 
 export const useNewRestaurant = () => {
-    // Estado desde Zustand
+
     const {
         name,
         address,
@@ -23,7 +23,7 @@ export const useNewRestaurant = () => {
         reset,
     } = useNewRestaurantStore()
 
-    // Hooks externos
+  
     const { restaurants } = useRestaurants()
     const { createRestaurant, loading, error: apiError } = useCreateRestaurant()
 
@@ -52,12 +52,10 @@ export const useNewRestaurant = () => {
         }
     }
 
-    // Eliminar imagen
     const handleRemoveImage = () => {
         setImage(null)
     }
 
-    // Validar campos
     const validateFields = () => {
         setValidationError("")
         if (!name.trim()) {
@@ -75,7 +73,6 @@ export const useNewRestaurant = () => {
         return true
     }
 
-    // Guardar restaurante
     const handleSave = async () => {
         if (!validateFields()) return
 
@@ -106,29 +103,24 @@ export const useNewRestaurant = () => {
         }
     }
 
-    // Resetear todo
     const handleReset = () => {
         reset()
     }
 
     return {
-        // Campos del formulario
         name,
         setName,
         address,
         setAddress,
         description,
         setDescription,
-        // Imagen
         image,
         handleFileChange,
         handleRemoveImage,
-        // Estados
         isSaved,
         loading,
         errorMessage: validationError || apiError,
         createdRestaurantId,
-        // Acciones
         handleSave,
         handleReset,
     }

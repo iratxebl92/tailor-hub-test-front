@@ -1,11 +1,9 @@
-// User base type
 export interface User {
   id: number;
   username: string;
   email?: string;
 }
 
-// Auth request types
 export interface LoginRequest {
   username: string;
   password: string;
@@ -16,7 +14,6 @@ export interface RegisterRequest {
   password: string;
 }
 
-// Auth response types
 export interface LoginResponse {
   token: string;
   user?: User;
@@ -35,7 +32,6 @@ export interface ValidateResponse {
   };
 }
 
-// Register form type
 export interface RegisterFormData {
   email: string;
   username: string;

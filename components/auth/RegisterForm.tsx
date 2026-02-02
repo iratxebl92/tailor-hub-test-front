@@ -51,7 +51,6 @@ export const RegisterForm = () => {
           />
         )}
 
-        {/* Login Link */}
         <div className="text-white text-sm sm:text-base">
           ¿Ya tienes cuenta?{' '}
           <Link href="/login" className="underline text-white/90 hover:text-white">
