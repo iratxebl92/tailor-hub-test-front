@@ -71,7 +71,8 @@ export function NewRestaurantForm() {
                 <button
                     onClick={handleSave}
                     disabled={loading}
-                    className="px-10 py-2.5 border border-slate-400 rounded-full text-black font-bold hover:bg-black hover:text-white transition-all w-full sm:w-auto hover:cursor-pointer"
+                    className={`px-10 py-2.5 border border-slate-400 rounded-full text-black font-bold hover:bg-black hover:text-white transition-all w-full sm:w-auto hover:cursor-pointer ${loading && "opacity-50 cursor-not-allowed" }`}
+              
                 >
                     {loading ? "Guardando..." : "Guardar"}
                 </button>
