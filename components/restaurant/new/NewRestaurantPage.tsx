@@ -1,13 +1,8 @@
 "use client"
 
 import { useEffect } from "react"
-import { UserHeader } from "@/components/core/UserHeader"
-import { ImageUploader } from "./ImageUploader"
-import { NewRestaurantForm } from "./NewRestaurantForm"
-import { SuccessView } from "./SuccessView"
-import { Footer } from "@/components/core/Footer"
-import { useNewRestaurant } from "./hook/useNewRestaurant"
-import { LoadingSpinner } from "@/components/core/LoadingSpinner"
+import { UserHeader, Footer, LoadingSpinner } from "@/components/core"
+import { NewRestaurantForm, SuccessView, useNewRestaurant, ImageUploader } from "@/components/restaurant/new"
 
 export function NewRestaurantPage() {
     const { isSaved, loading, handleReset } = useNewRestaurant()

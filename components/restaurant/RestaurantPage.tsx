@@ -3,13 +3,9 @@
 import { useRouter } from "next/navigation"
 import { useDeleteRestaurant, useRestaurant, useAddReview } from "@/hooks/useRestaurants"
 import { useAuthStore } from "@/store/authStore"
-import { UserHeader } from "@/components/core/UserHeader"
-import { RestaurantHero } from "./RestaurantHero"
-import { RestaurantInfo } from "./RestaurantInfo"
-import { CommentForm } from "./CommentForm"
-import { CommentList } from "./CommentList"
-import { Footer } from "../core/Footer"
-import { LoadingSpinner } from "../core/LoadingSpinner"
+import { RestaurantHero, RestaurantInfo, CommentForm, CommentList } from "@/components/restaurant"
+import { Footer, LoadingSpinner, UserHeader } from "@/components/core"
+
 
 type RestaurantPageProps = {
   id: string

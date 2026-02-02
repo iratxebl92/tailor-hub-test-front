@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { RestaurantPage } from "@/components/restaurant/RestaurantPage"
+import { RestaurantPage } from "@/components/restaurant"
 
 export const metadata: Metadata = {
   title: 'Restaurant details',

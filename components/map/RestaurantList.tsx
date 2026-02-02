@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation"
 import { useRestaurants } from "@/hooks/useRestaurants"
 import { useRestaurantUIStore } from "@/store/restaurantStore"
-import { RestaurantCard } from "./RestaurantCard"
+import { RestaurantCard } from "./"
 import type { Restaurant, RestaurantCardType } from "@/domain/restaurants.type"
 
 

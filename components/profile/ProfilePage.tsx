@@ -1,8 +1,7 @@
 "use client"
 
-import { UserHeader } from "@/components/core/UserHeader"
+import { UserHeader, Footer } from "@/components/core"
 import { ProfileCard } from "./ProfileCard"
-import { Footer } from "../core/Footer"
 
 export function ProfilePage() {
   return (

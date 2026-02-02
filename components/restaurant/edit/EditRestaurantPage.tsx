@@ -1,10 +1,9 @@
 "use client"
 
-import { UserHeader } from "@/components/core/UserHeader"
+import { UserHeader, Footer } from "@/components/core"
 import { EditImageUploader } from "./EditImageUploader"
 import { EditRestaurantForm } from "./EditRestaurantForm"
 import { EditSuccessView } from "./EditSuccessView"
-import { Footer } from "@/components/core/Footer"
 import { useEditRestaurant } from "./hook/useEditRestaurant"
 
 interface EditRestaurantPageProps {

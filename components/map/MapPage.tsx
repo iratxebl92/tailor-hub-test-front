@@ -1,11 +1,9 @@
 "use client"
 
-import { UserHeader } from "@/components/core/UserHeader"
-import { MapContainer } from "./MapContainer"
-import { RestaurantList } from "./RestaurantList"
-import { Footer } from "../core/Footer"
+import { RestaurantList, MapContainer } from "./"
+import { Footer, LoadingSpinner, UserHeader } from "@/components/core"
 import { useRestaurants } from "@/hooks/useRestaurants"
-import { LoadingSpinner } from "../core/LoadingSpinner"
+
 
 export function MapPage() {
   const {  loading } = useRestaurants()

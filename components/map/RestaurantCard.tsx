@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import { useState } from "react"
+import Image from "next/image"
 import { Stars } from "../Icons/Stars"
 import type { RestaurantCardType} from "@/domain/restaurants.type"
 

@@ -1,0 +1,5 @@
+export { RestaurantPage } from "./RestaurantPage"
+export { RestaurantHero } from "./RestaurantHero"
+export { RestaurantInfo } from "./RestaurantInfo"
+export { CommentForm } from "./CommentForm"
+export { CommentList } from "./CommentList"

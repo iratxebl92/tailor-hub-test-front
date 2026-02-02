@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation"
 import { useNewRestaurant } from "./hook/useNewRestaurant"
-import { CheckIcon } from "@/components/Icons/CheckIcon"
+
 
 export function SuccessView() {
     const router = useRouter()
