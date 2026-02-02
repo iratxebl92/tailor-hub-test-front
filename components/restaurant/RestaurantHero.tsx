@@ -8,7 +8,7 @@ type RestaurantHeroProps = {
 
 export function RestaurantHero({ name, address, image }: RestaurantHeroProps) {
   return (
-    <div className="relative h-[300px] sm:h-[400px] w-full rounded-3xl overflow-hidden shadow-lg">
+    <div className="relative h-80 sm:h-96 w-full rounded-3xl overflow-hidden shadow-lg">
 
       <div 
         className="absolute inset-0 bg-cover bg-center transition-transform duration-700 hover:scale-105"

@@ -27,18 +27,19 @@ export function NewRestaurantPage() {
 
     return (
         <main className="min-h-screen bg-white flex flex-col font-sans">
+            <div className="px-4 sm:px-6 md:px-8 pt-4 sm:pt-6">
+
             <UserHeader />
+            </div>
 
             <div className="flex-1 w-full max-w-6xl mx-auto px-6 py-10 flex flex-col items-center justify-center">
                 <img src="/images/tailor-hub-icon.avif" alt="Tailor Hub icon" className="w-15 h-15 mb-10" />
                 {!isSaved ? (
                     <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                        {/* Columna Izquierda: Imagen */}
                         <div className="w-full flex justify-center md:justify-end">
                              <ImageUploader />
                         </div>
-                        
-                        {/* Columna Derecha: Formulario */}
+                       
                         <div className="w-full ">
                             <NewRestaurantForm />
                         </div>

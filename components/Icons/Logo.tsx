@@ -8,7 +8,7 @@ export const Logo = ({ className }: LogoProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className={className ?? 'w-40 h-auto text-[#362C2C]'}
+      className={className ?? 'w-40 h-auto text-stone-800'}
       viewBox="0 0 606 135"
       aria-hidden="true"
     >   

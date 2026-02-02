@@ -19,7 +19,7 @@ export function ProfileCard() {
           <h2 className="text-3xl font-bold mb-1">Nombre usuario</h2>
           <p className="text-white/70 text-base">usuario@tailorhub.es</p>
           
-          <div className="mt-4 inline-flex px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 text-white text-[10px] font-bold uppercase tracking-widest rounded-full">
+          <div className="mt-4 inline-flex px-3 py-1 bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold uppercase tracking-widest rounded-full">
             Usuario Premium
           </div>
         </div>

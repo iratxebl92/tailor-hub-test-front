@@ -53,7 +53,7 @@ export function CommentForm({ restaurantId, userName, onReviewAdded, isSubmittin
           >
             <svg
               className={`w-6 h-6 ${
-                star <= rating ? "fill-blue-500 text-blue-500" : "text-gray-300"
+                star <= rating ? "fill-tailor-bg text-tailor-bg" : "text-gray-300"
               }`}
               fill="none"
               stroke="currentColor"
@@ -78,7 +78,7 @@ export function CommentForm({ restaurantId, userName, onReviewAdded, isSubmittin
         onChange={(e) => setComment(e.target.value)}
         placeholder="Escribe tu comentario sobre el restaurante"
         disabled={isSubmitting}
-        className="w-full min-h-[120px] p-4 text-sm bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none mb-4 disabled:opacity-50"
+        className="w-full min-h-32 p-4 text-sm bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none mb-4 disabled:opacity-50"
       />
 
       {error && (

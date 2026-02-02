@@ -59,7 +59,7 @@ function Map() {
     })
   }, [restaurants, selectedRestaurantId])
 
-  return <div ref={mapContainer} className="w-full h-full min-h-[400px]" />
+  return <div ref={mapContainer} className="w-full h-full min-h-96" />
 }
 
 // Exportación especial para que Next.js no falle con Mapbox

@@ -62,7 +62,7 @@ export function NewRestaurantForm() {
                         placeholder="Escribe información acerca del restaurante"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        className="w-full min-h-[120px] px-5 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none transition-all"
+                        className="w-full min-h-32 px-5 py-4 bg-gray-50 border-none rounded-2xl focus:ring-2 focus:ring-blue-500 outline-none resize-none transition-all"
                     />
                 </div>
             </div>

@@ -8,14 +8,14 @@ export function ImageUploader() {
     const { image, handleFileChange, handleRemoveImage } = useNewRestaurant()
 
     return (
-        <div className="w-full max-w-[400px]">
+        <div className="w-full max-w-sm">
         {!image ? (
-            <label className="flex flex-col items-center justify-center w-full aspect-square border border-gray-400 rounded-[32px] cursor-pointer hover:bg-gray-50 transition-colors bg-[#F2F2F2]">
+            <label className="flex flex-col items-center justify-center w-full aspect-square border border-gray-400 rounded-3xl cursor-pointer hover:bg-gray-50 transition-colors bg-gray-100">
                 <span className="text-gray-800 text-lg">Añadir imágen</span>
                 <input type="file" className="hidden" accept="image/*" onChange={handleFileChange} />
             </label>
         ) : (
-            <div className="relative w-full aspect-square rounded-[32px] overflow-hidden group border border-gray-200 shadow-sm">
+            <div className="relative w-full aspect-square rounded-3xl overflow-hidden group border border-gray-200 shadow-sm">
                 <Image src={image} alt="Preview" fill className="object-cover" />
                 <div className="absolute inset-0 bg-black/40 opacity-100 transition-opacity flex items-center justify-center ">
                     <button

@@ -23,7 +23,7 @@ export function MapPage() {
 
       <div className="flex-1 flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8 p-4 sm:p-6 md:p-8 min-h-0 overflow-hidden">
         
-        <div className="flex flex-col flex-1 lg:flex-[1.2] min-h-0">
+        <div className="flex flex-col flex-1 lg:grow min-h-0">
           <MapContainer />
         
           <Footer
@@ -31,7 +31,7 @@ export function MapPage() {
           />
         </div>
 
-        <div className="flex-1 lg:flex-[0.8] min-h-0">
+        <div className="flex-1 lg:shrink min-h-0">
           <RestaurantList />
         </div>
       </div>
