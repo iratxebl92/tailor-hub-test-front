@@ -1,9 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { AddImageIcon } from "@/components/Icons/AddImageIcon"
 import { useEditRestaurant } from "./hook/useEditRestaurant"
 import { LoadingSpinner } from "@/components/core/LoadingSpinner"
+import { AddImageIcon } from "@/components/Icons/AddImageIcon"
 
 interface EditImageUploaderProps {
     restaurantId: number | string
