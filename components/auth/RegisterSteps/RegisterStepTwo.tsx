@@ -24,13 +24,7 @@ export const RegisterStepTwo = ({ onSubmit, loading, error }: RegisterStepTwoPro
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword)
   }
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center py-12">
-        <LoadingSpinner />
-      </div>
-    )
-  }
+
 
   return (
     <>

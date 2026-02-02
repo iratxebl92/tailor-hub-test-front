@@ -6,8 +6,9 @@ import { useRestaurants } from "@/hooks/useRestaurants"
 
 
 export function MapPage() {
-  const {  loading } = useRestaurants()
-  if (loading) {
+  const {  loading, restaurants } = useRestaurants()
+
+  if (loading ||  restaurants.length === 0) {
     return (
       <LoadingSpinner />
     )
