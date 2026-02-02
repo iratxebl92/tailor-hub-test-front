@@ -49,6 +49,8 @@ export const LoginForm = () => {
               placeholder="Escribe tu usuario"
               className="w-full px-4 py-3 rounded-full border-2 border-white bg-transparent text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
               disabled={loading}
+              data-testid="username-input"
+              pattern="^[a-zA-Z0-9]+$"
             />
           </div>
 
@@ -64,6 +66,8 @@ export const LoginForm = () => {
               placeholder="Escribe tu contraseña"
               className="w-full px-4 py-3 rounded-full border-2 border-white bg-transparent text-white placeholder:text-white/70 focus:outline-none focus:ring-2 focus:ring-white/50"
               disabled={loading}
+              data-testid="password-input"
+              pattern="^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':\\|,.<>/?]*$"
             />
           </div>
 

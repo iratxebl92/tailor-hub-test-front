@@ -4,7 +4,7 @@ import { EyeIcon } from '@/components/Icons/EyeIcon'
 import { EyeOffIcon } from '@/components/Icons/EyeOffIcon'
 import { useAuthStore } from '@/store/authStore'
 import { useState } from 'react'
-import { LoadingSpinner } from '@/components/core/LoadingSpinner'
+
 interface RegisterStepTwoProps {
   onSubmit: () => void
   loading: boolean
